@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>FinTrack</title>
+<link href="/app/Interface/style.css" rel="stylesheet"/>
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+<script src="/frontEnd/script.js"></script>
+</head>
+<body>
+
+<header>
+  <div>
+    <div class="logo">Fin<span>Track</span></div>
+    <div class="tagline">Controle financeiro pessoal</div>
+  </div>
+</header>
+
+<div class="wrapper">
+
+  <div class="saldo-banner">
+    <div class="saldo-item">
+      <div class="saldo-label">Receitas</div>
+      <div class="saldo-value green" id="total-receitas">R$ 0,00</div>
+    </div>
+    <div class="saldo-item">
+      <div class="saldo-label">Despesas</div>
+      <div class="saldo-value red" id="total-despesas">R$ 0,00</div>
+    </div>
+    <div class="saldo-item">
+      <div class="saldo-label">Saldo</div>
+      <div class="saldo-value white" id="total-saldo">R$ 0,00</div>
+    </div>
+  </div>
+
+  <div>
+    <div class="card">
+      <div class="card-title">Nova Transação</div>
+
+      <div class="tipo-tabs">
+        <button class="tipo-tab active-receita" id="tab-receita" onclick="setTipo('receita')">↑ Receita</button>
+        <button class="tipo-tab" id="tab-despesa" onclick="setTipo('despesa')">↓ Despesa</button>
+      </div>
+
+      <label>Valor</label>
+      <input type="number" id="valor" placeholder="0,00" min="0.01" step="0.01"/>
+
+      <label>Categoria</label>
+      <select id="categoria">
+        <option value="">Selecione...</option>
+        <optgroup label="Receitas">
+          <option value="Salário">Salário</option>
+          <option value="Freelance">Freelance</option>
+          <option value="Investimentos">Investimentos</option>
+          <option value="Outros Rendimentos">Outros Rendimentos</option>
+        </optgroup>
+        <optgroup label="Despesas">
+          <option value="Alimentação">Alimentação</option>
+          <option value="Moradia">Moradia</option>
+          <option value="Transporte">Transporte</option>
+          <option value="Saúde">Saúde</option>
+          <option value="Educação">Educação</option>
+          <option value="Lazer">Lazer</option>
+          <option value="Vestuário">Vestuário</option>
+          <option value="Assinaturas">Assinaturas</option>
+          <option value="Outros">Outros</option>
+        </optgroup>
+      </select>
+
+      <label>Descrição</label>
+      <input type="text" id="descricao" placeholder="Ex: Almoço no restaurante"/>
+
+      <button class="btn-submit" id="btn-submit" onclick="salvarTransacao()">+ Adicionar Receita</button>
+    </div>
+
+    <div class="card historico-wrap" style="margin-top:20px;">
+      <div class="card-title">Histórico</div>
+      <div class="historico-list" id="historico-list">
+        <div class="empty-state">Nenhuma transação ainda.</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="relatorio">
+    <div class="card">
+      <div class="card-title">Relatório Financeiro</div>
+
+      <div id="dica-box" style="display:none;" class="dica-box">
+        <span class="dica-icon">💡</span><span id="dica-text"></span>
+      </div>
+
+      <div class="charts-row">
+        <div class="chart-box">
+          <div class="chart-box-title">Gastos por Categoria</div>
+          <canvas id="chartPizza" height="200"></canvas>
+        </div>
+        <div class="chart-box">
+          <div class="chart-box-title">Receita vs Despesa</div>
+          <canvas id="chartBarras" height="200"></canvas>
+        </div>
+      </div>
+
+      <div class="card-title" style="margin-top:4px;">Top Categorias de Gasto</div>
+      <div class="cat-list" id="cat-list">
+        <div class="empty-state">Sem dados ainda.</div>
+      </div>
+    </div>
+  </div>
+
+</div>
+
+<div id="toast"></div>
+
+<script src="/app/Interface/scripts.js"></script>
+</body>
+</html>
